@@ -15,9 +15,11 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private long id;
 	@NotBlank
+	@Size(max=60)
 	private String nome;
 	@NotBlank
 	@Email
+	@Size(max=255)
 	private String email;
 	@NotBlank
 	@Size(max=20)

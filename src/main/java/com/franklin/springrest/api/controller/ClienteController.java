@@ -3,6 +3,8 @@ package com.franklin.springrest.api.controller;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.franklin.springrest.domain.model.Cliente;
 import com.franklin.springrest.domain.repository.ClienteRepository;
+import com.franklin.springrest.domain.service.ClienteService;
 
 @RestController
 @RequestMapping("/clientes")
@@ -25,6 +28,8 @@ public class ClienteController {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
+	@Autowired
+	private ClienteService clienteService;
 
 	@GetMapping
 	public List<Cliente> listar() {
@@ -34,7 +39,7 @@ public class ClienteController {
 	}
 
 	@GetMapping("/{clienteId}")
-	public ResponseEntity<Cliente> buscar(@PathVariable Long clienteId) {
+	public ResponseEntity<Cliente> buscar(@Valid @PathVariable Long clienteId) {
 		Optional<Cliente> cliente = clienteRepository.findById(clienteId);
 
 		if (cliente.isPresent()) {
@@ -46,8 +51,8 @@ public class ClienteController {
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public Cliente adicionar(@RequestBody Cliente cliente) {
-		return clienteRepository.save(cliente);
+	public Cliente adicionar(@Valid @RequestBody Cliente cliente) {
+		return clienteService.salvar(cliente);
 	}
 
 	@PutMapping("/{clienteId}")
@@ -58,7 +63,7 @@ public class ClienteController {
 		}
 
 		cliente.setId(clienteId);
-		cliente = clienteRepository.save(cliente);
+		cliente = clienteService.salvar(cliente);
 		return ResponseEntity.ok(cliente);
 	}
 	
@@ -68,7 +73,7 @@ public class ClienteController {
 		if (!clienteRepository.existsById(clienteId)) {
 			return ResponseEntity.notFound().build();
 		}
-		clienteRepository.deleteById(clienteId);
+		clienteService.remover(clienteId);
 		
 		return ResponseEntity.noContent().build();
 		
