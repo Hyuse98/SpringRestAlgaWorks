@@ -10,10 +10,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.Valid;
+import javax.validation.groups.ConvertGroup;
+import javax.validation.groups.Default;
+
+import com.franklin.springrest.domain.ValidationGroups;
 
 @Entity
 public class OrdemServico {
 	
+	@Valid
+	@ConvertGroup(from = Default.class, to = ValidationGroups.ClienteId.class)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
