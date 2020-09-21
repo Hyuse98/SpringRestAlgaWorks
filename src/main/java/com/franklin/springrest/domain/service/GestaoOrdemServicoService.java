@@ -17,18 +17,16 @@ public class GestaoOrdemServicoService {
 
 	@Autowired
 	private OrdemServicoRepository ordemServiceRepository;
-
 	@Autowired
-	private ClienteRepository clienteRepository;
+	private ClienteRepository clienteServiceRepository;
 
-	public OrdemServico criar (OrdemServico ordemServico) {
-		Cliente cliente = clienteRepository.findById(ordemServico.getCliente().getId())
-				.orElseThrow(() -> new ExceptionsBO("opoha"));
-		
+	public OrdemServico criar(OrdemServico ordemServico) {
+		Cliente cliente = clienteServiceRepository.findById(ordemServico.getCliente().getId()).orElseThrow(() -> new ExceptionsBO("Cliente Não Encontrado"));
 		ordemServico.setCliente(cliente);
 		ordemServico.setStatus(StatusOrdemServico.ABERTA);
 		ordemServico.setDataAbertura(LocalDateTime.now());
-		return ordemServiceRepository.save(ordemServico);		
+		return ordemServiceRepository.save(ordemServico);
+
 	}
 
 }

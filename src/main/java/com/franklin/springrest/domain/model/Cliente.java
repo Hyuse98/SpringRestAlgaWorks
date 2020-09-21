@@ -16,6 +16,7 @@ public class Cliente {
 	
 	@NotNull(groups = ValidationGroups.ClienteId.class)
 	@Id
+	@NotNull(groups = ValidationGroups.ClienteId.class)	
 	@GeneratedValue(strategy = GenerationType.IDENTITY)	
 	private long id;
 	@NotBlank
