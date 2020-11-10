@@ -1,7 +1,10 @@
 package com.franklin.springrest.api.model;
 
+import javax.validation.constraints.NotBlank;
+
 public class ComentarioInput {
 
+	@NotBlank
 	private String descricao;
 
 	public String getDescricao() {

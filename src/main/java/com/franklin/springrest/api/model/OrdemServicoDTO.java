@@ -2,6 +2,8 @@ package com.franklin.springrest.api.model;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.franklin.springrest.domain.model.StatusOrdemServico;
 
@@ -14,6 +16,7 @@ public class OrdemServicoDTO {
 	private StatusOrdemServico status;
 	private OffsetDateTime dataAbertura;
 	private OffsetDateTime dataFinalizacao;
+	private List<Comentario> comentarios = new ArrayList<>();
 
 	public long getId() {
 		return id;
@@ -70,5 +73,13 @@ public class OrdemServicoDTO {
 	public void setDataFinalizacao(OffsetDateTime dataFinalizacao) {
 		this.dataFinalizacao = dataFinalizacao;
 	}
+
+	public List<Comentario> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}	
 
 }

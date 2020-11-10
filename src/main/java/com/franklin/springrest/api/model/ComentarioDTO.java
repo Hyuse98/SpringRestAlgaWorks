@@ -5,7 +5,9 @@ import java.time.OffsetDateTime;
 public class ComentarioDTO {
 
 	private long id;
+	
 	private String descricao;
+	
 	private OffsetDateTime dataEnvio;
 
 	public long getId() {
